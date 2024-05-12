@@ -1,46 +1,36 @@
-<div align="center" style="text-align:center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/logo_text_dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="images/logo_text_light.svg">
-    <img alt="ncspot logo" height="128" src="images/logo_text_light.svg">
-  </picture>
-  <h3>An ncurses Spotify client written in Rust using librespot</h3>
+## A `ncspot` Clone
 
-[![Crates.io](https://img.shields.io/crates/v/ncspot.svg)](https://crates.io/crates/ncspot)
-[![Gitter](https://badges.gitter.im/ncspot/community.svg)](https://gitter.im/ncspot/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-  <img alt="ncspot search tab" src="images/screenshot.png">
-</div>
-
-ncspot is an ncurses Spotify client written in Rust using librespot. It is heavily inspired by
-ncurses MPD clients, such as [ncmpc](https://musicpd.org/clients/ncmpc/). My motivation was to
-provide a simple and resource friendly alternative to the official client as well as to support
-platforms that currently don't have a Spotify client, such as the \*BSDs.
-
-ncspot only works with a Spotify premium account as it offers features that are not available for
-free accounts.
+This repo is a clone of [`ncspot`](https://github.com/hrkfdn/ncspot), aiming at adding some more __useful commands__, __refining the UI__, and __clean up some dirty code__ I believe.
 
 ## Features
-- Support for tracks, albums, playlists, genres, searching...
-- Small [resource footprint](doc/resource_footprint.md)
-- Support for a lot of platforms
-- Vim keybindings out of the box
-- IPC socket for remote control
-- Automatic authentication using a password manager
+
+- All `ncspot` features
+- Some features which is more intuitive to me, like current one `playorplaynext`
+
+## More Works to Do
+
+- [ ] More flexible keymap settings, supporting something like this:
+
+```toml
+# a single keybinding with different functions in different views
+"Enter" = { queue = "play", playlist = "playnext" }
+```
+
+- [ ] Highlight when add song to queue, just more reasonable, right?
+
+- [ ] Fix display problem of long string components, if you are a __classic musics__(which alawys have a long name) listener...
+
+![Long names are broken!](./images/broken-entry.png)
 
 ## Installation
-ncspot is available on macOS (Homebrew), Windows (Scoop, WinGet), Linux (native package and Flathub) and the
-BSD's. Detailed installation instructions for each platform can be found [here](/doc/users.md).
+
+Simply clone this repo, build it with `cargo build`
 
 ## Configuration
-A configuration file can be provided. The default location is `~/.config/ncspot`. Detailed
-configuration information can be found [here](/doc/users.md#configuration).
 
-## Building
-Building ncspot requires a working [Rust installation](https://www.rust-lang.org/tools/install) and
-a Python 3 installation. To compile ncspot, run `cargo build`. For detailed instructions on building
-ncspot, there is more information [here](/doc/developers.md).
-
-## Packaging
-Information about provided files, how to generate some of them and current package status accross
-platforms can be found [here](/doc/package_maintainers.md).
+- A new command is added, named `playorplaynext`, [details here](./play-or-playnext.md)
+```toml
+# You can do
+[keybindings]
+"Enter" = "playorplaynext"
+```
