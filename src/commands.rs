@@ -304,6 +304,7 @@ impl CommandManager {
             }
 
             Command::Queue
+            | Command::PlayOrPlayNext
             | Command::PlayNext
             | Command::Play
             | Command::Save

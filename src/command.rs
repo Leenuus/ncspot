@@ -164,6 +164,9 @@ pub enum Command {
     Redraw,
     Execute(String),
     Reconnect,
+    // NOTE: a simple hack maybe add a command named
+    // play or playnext, making it context aware internally
+    PlayOrPlayNext
 }
 
 impl fmt::Display for Command {
@@ -214,6 +217,7 @@ impl fmt::Display for Command {
             | Self::Clear
             | Self::Queue
             | Self::PlayNext
+            | Self::PlayOrPlayNext
             | Self::Play
             | Self::UpdateLibrary
             | Self::Save
@@ -238,6 +242,7 @@ impl fmt::Display for Command {
 impl Command {
     pub fn basename(&self) -> &str {
         match self {
+            Self::PlayOrPlayNext => "playorplaynext",
             Self::Quit => "quit",
             Self::TogglePlay => "playpause",
             Self::Stop => "stop",
@@ -401,6 +406,7 @@ pub fn parse(input: &str) -> Result<Vec<Command>, CommandParseError> {
             let command = handle_aliases(command);
             use CommandParseError::*;
             let command = match command {
+                "playorplaynext" => Command::PlayOrPlayNext,
                 "quit" => Command::Quit,
                 "playpause" => Command::TogglePlay,
                 "stop" => Command::Stop,

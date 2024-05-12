@@ -118,6 +118,10 @@ impl ViewExt for QueueView {
 
     fn on_command(&mut self, s: &mut Cursive, cmd: &Command) -> Result<CommandResult, String> {
         match cmd {
+            Command::PlayOrPlayNext => {
+                self.queue.play(self.list.get_selected_index(), true, false);
+                return Ok(CommandResult::Consumed(None));
+            }
             Command::Play => {
                 self.queue.play(self.list.get_selected_index(), true, false);
                 return Ok(CommandResult::Consumed(None));
